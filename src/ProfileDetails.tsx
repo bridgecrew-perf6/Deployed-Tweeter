@@ -1,8 +1,32 @@
 import { Avatar, Box, Heading, Flex } from "@chakra-ui/react"
-import React from "react"
+import React, { useContext } from "react"
+import { MdVerifiedUser } from "react-icons/md"
+import { Icon, Button } from "@chakra-ui/react"
+import { TokenContext, UserContext } from "./App"
+import { baseUrl } from "./settings"
 
 // @ts-ignore
 const ProfileDetails = ({userDetails}) => {
+
+    const {user, setUser} = useContext(UserContext)
+    const {token, setToken} = useContext(TokenContext)
+
+    const handleFollow = () => {
+        fetch(`${baseUrl}/tweeter/${userDetails.username}/`,{
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json",
+                'Authorization': `Token ${token}`
+            },
+            body: JSON.stringify({"follow": userDetails.username})
+        })
+        .then(response => response.json())
+        .then(data => alert("Follow Successful"))
+        .catch(err => alert(err))
+        
+    }
+
+
     return (
         <Box borderBottom={"1px"} borderColor={"gray.200"} height={"30vh"}>
             <Flex direction={"row"} justifyContent={"space-between"}>
@@ -10,10 +34,14 @@ const ProfileDetails = ({userDetails}) => {
                     <Avatar size='xl' name={userDetails.username} src={userDetails.image_url} />
                 </Box>
                 <Box>
-                    <Heading>{userDetails.first || "JOHN"} {userDetails.last || "DOE"}</Heading>
-                    <Heading size="md">@{userDetails.username}</Heading>
+                    <Heading size="md">{userDetails.first || "JOHN"} {userDetails.last || "DOE"}</Heading>
+                    <Heading size="md" display={"inline"}>@{userDetails.username}</Heading>
+                    {userDetails.is_verified ? <Icon display={"inline"} as={MdVerifiedUser}></Icon> : <p style={{display: "inline"}}>Please Verify Email Id to get Blue Tick</p>}
                     <Heading size="md">Bio: {userDetails.bio}</Heading>
-                    <Heading size="xs">Joined on {userDetails.doj}</Heading>
+                    <Box>
+                        <Heading size="xs" display={"inline"}>Joined on {userDetails.doj}</Heading>
+                    </Box>
+                    <Button onClick={handleFollow}>Follow</Button>
                 </Box>
             </Flex>
         </Box>

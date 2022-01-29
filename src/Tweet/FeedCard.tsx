@@ -28,7 +28,7 @@ const FeedCard = ({ tweeter: {first: firstName, last: lastName, image_url: avata
                     <Link to={`/tweet/${id}`}>
                     <Box>{tweetContent}</Box>
                     <ButtonGroup>
-                        <Link to="/tweet"><Button size="sm"><Icon as={FaRegComment}></Icon></Button></Link>
+                        <Link to={`/tweet/${id}`}><Button size="sm"><Icon as={FaRegComment}></Icon></Button></Link>
                         <Button size="sm"><Icon as={AiOutlineHeart}></Icon>{likes}</Button>
                         {/* <Button size="sm"><Icon as={GiAnticlockwiseRotation}></Icon></Button> */}
                     </ButtonGroup>

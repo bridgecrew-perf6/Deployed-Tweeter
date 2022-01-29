@@ -7,7 +7,7 @@ const tweeterGray = "#38444D";
 const tweeterBlack = "#000000";
 const tweeterWhite = "#FFFFFF";
 */
-const theme = extendTheme({
+let theme = extendTheme({
     fonts: {
         heading: "Open Sans",
         body: "Inter"
@@ -20,7 +20,15 @@ const theme = extendTheme({
                 width: "100%",
             }
         })
-    }
+    },
 })
+
+
+const config = {
+  initialColorMode: 'dark',
+  useSystemColorMode: false,
+}
+
+theme = extendTheme({ config })
 
 export default theme;

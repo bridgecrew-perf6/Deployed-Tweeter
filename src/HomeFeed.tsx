@@ -1,19 +1,21 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
-import { baseUrl } from '../settings'
-import { tweetArray, tweet } from '../Types/Tweets'
-import FeedCard from './FeedCard'
+import React, { useEffect, useState, useRef, useCallback, useContext } from 'react'
+import { baseUrl } from './settings';
+import { tweetArray, tweet } from './Types/Tweets';
+import FeedCard from './Tweet/FeedCard';
 
 import { v4 as uuidv4 } from 'uuid';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { TokenContext } from './App';
 
 type urlData = {
     url: string
 }
 
-const Feed = (props: urlData) => {
+const HomeFeed = (props: urlData) => {
 
     const {url} = props
+    const {token, setToken} = useContext(TokenContext)
 
     const [pageNumber, setPageNumber] = useState(1) as [number, Function] 
     const [items, setItems] = useState([]) as [tweetArray, Function]
@@ -26,7 +28,13 @@ const Feed = (props: urlData) => {
             return
         }
 
-        fetch(`${url}?page_number=${pageNumber}`)
+        fetch(`${url}?page_number=${pageNumber}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
+            }
+        })
         .then(response => {
             if(response.status === 204) {
                 setLoad(true)
@@ -76,4 +84,4 @@ const Feed = (props: urlData) => {
         </InfiniteScroll>
 }
 
-export default Feed
+export default HomeFeed

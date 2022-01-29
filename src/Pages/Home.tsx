@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Feed from '../Tweet/Feed'
 import TweetForm from '../Tweet/TweetForm'
+import HomeFeed from '../HomeFeed'
 
 import { TokenContext } from '../App'
 import { baseUrl } from '../settings'
@@ -17,10 +18,9 @@ const Home = () => {
             <Navbar></Navbar>
             <Flex direction="column">
                 <TweetForm></TweetForm>
-                {token === "" ? <Feed></Feed>: <Feed></Feed>}
+                {token === "" ? <Feed url={`${baseUrl}/tweet`}></Feed>: <HomeFeed url={`${baseUrl}/tweet`}></HomeFeed>}
             </Flex>
-            <Box>Last layout</Box>
-            
+            <Box></Box>
         </Flex>
     )
 }

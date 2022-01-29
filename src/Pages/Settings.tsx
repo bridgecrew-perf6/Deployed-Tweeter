@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import useForm from '../Hooks/useForm'
 import { baseUrl } from '../settings'
 import { settingForm } from '../Types/Form'
+import { UserContext } from '../App'
 
 
 
@@ -23,6 +24,7 @@ const Settings = () => {
         "dob": null,
         "gender": ""
     }
+    const {user, setUser} = useContext(UserContext)
     const [form, setForm] = useState(initialFormData) as [settingForm, Function]
     const [loading, setLoading] = useState(true)
 
@@ -95,7 +97,7 @@ const Settings = () => {
         <Flex height={"100vh"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
             <Box width={"80%"} boxSizing='border-box'>
 
-                <Heading textAlign={"center"}>Change Settings</Heading>
+                <Heading textAlign={"center"}>{user.username}'s Settings</Heading>
                 <FormControl maxWidth={"100vw"} boxSizing='border-box'>
                 <Input type={"file"} onChange={(e) => uploadImage(e.target.files)}></Input>
                 {/* <FormLabel>Email Address</FormLabel> */}
