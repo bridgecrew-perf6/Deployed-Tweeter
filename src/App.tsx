@@ -39,7 +39,7 @@ export const App = () => {
   const value = {token, setToken}
 
   useEffect(() => {
-    if(token === null || user !== null) {
+    if(token === "" || user !== null) {
       return
     }
 

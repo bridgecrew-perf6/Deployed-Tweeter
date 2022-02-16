@@ -13,7 +13,7 @@ type contentData = {content: string}
 const TweetForm = () => {
 
     const navigate = useNavigate()
-    const [form, setForm] = useForm({content: ""}) as [contentData, Function]
+    const [form, setForm, resetForm] = useForm({content: ""}) as [contentData, Function, Function]
     const [submit, setSubmit] = useState(false) as [boolean, Function]
     // @ts-ignore
     const {token, setToken} = useContext(TokenContext)
@@ -32,16 +32,22 @@ const TweetForm = () => {
             })
             .then(res => {
                 setSubmit(false)
+                resetForm()
+                if(res.status === 401) {
+                    alert('Please Login')
+                    return
+                }
             })
+            .catch(err => alert(err))
         }
     }, [submit, form.content, token])
 
 
     return (
         <FormControl id="tweet" maxWidth="40vw">
-            <Input type="text" placeholder="Tweet it!!" name="content" 
-            onChange={(e) => setForm(e)} value={form.content}></Input>
-            <Button onClick={() => setSubmit(true)}>Tweet</Button>
+            <Input type="text" placeholder={token === "" ? "Please Login To Tweet": "Tweet it!!"} name="content" 
+            onChange={(e) => setForm(e)} value={form.content} disabled={token === ""}></Input>
+            <Button onClick={() => setSubmit(true)} disabled={token===""}>Tweet</Button>
         </FormControl>
     )
 }

@@ -5,7 +5,15 @@ const useForm = (formParams: object ): [object, Function] => {
     const setter = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormState({...formState, [e.target.name]: e.target.value})
     }
-    return [formState, setter]
+    const resetForm =() => {
+        const formFields = Object.keys(formParams)
+        let resetObject = {}
+        for(let i = 0; i < formFields.length; i++) {
+            resetObject[formFields[i]] = ""
+        }
+        setFormState(resetObject)
+    }
+    return [formState, setter, resetForm]
 }
 
 export default useForm

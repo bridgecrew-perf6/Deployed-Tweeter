@@ -36,9 +36,15 @@ function Comments() {
             },
             body: JSON.stringify(comm)
         })
-        .then(res => res.json())
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
+        .then(res => {
+            console.log(res.status)
+            if(res.status === 201) {
+                setComm({comment: ""})
+                alert('Your tweet has been recorderd')
+                return res.json()
+            }
+        })
+        .catch(err => alert(err))
     }
 
     if(comments === null ) {
@@ -50,8 +56,9 @@ function Comments() {
         <Box>
             <FeedCard {...comments}></FeedCard>
             <FormControl>
-                <Input type="text" value={comm.comment} placeholder={'Write Your comment here'} onChange={handleCommentChange}></Input>
-                <Button onClick={handleCommentSubmit}>Submit Comment</Button>
+                <Input type="text" value={comm.comment} placeholder={token === "" ? "Please Login to comment":'Write Your comment here'} onChange={handleCommentChange}
+                disabled={token === ""}></Input>
+                <Button onClick={handleCommentSubmit} disabled={token === ""}>Submit Comment</Button>
             </FormControl>
             {/* @ts-ignore */}
             {comments.comments.map((comment) => <Comment {...comment}></Comment>)}

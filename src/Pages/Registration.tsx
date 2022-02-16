@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 import {baseUrl} from "../settings"
 import { Flex, Box } from '@chakra-ui/react'
+import Navbar from '../Navbar/Navbar'
 
 const Registration = () => {
 
@@ -48,34 +49,36 @@ const Registration = () => {
     useForm({'username': "",'email': ""  , 'password1': "", "password2": ""}) as [registrationForm, Function]
 
     return (
-        <Flex height={"100vh"} alignItems={"center"}>
-        <FormControl>
-            {/* <FormLabel>Email Address</FormLabel> */}
-            <Input type="email" placeholder="Enter a valid Email Address" 
-            name="email" value={form.email} margin="15px"
-            onChange={(e) => setForm(e)}></Input>
+        <>
+            <Flex height={"100vh"} alignItems={"center"}>
+            <FormControl as="form">
+                {/* <FormLabel>Email Address</FormLabel> */}
+                <Input type="email" placeholder="Enter a valid Email Address" 
+                name="email" value={form.email} margin="15px" id="email"
+                onChange={(e) => setForm(e)}></Input>
 
-            {/* <FormLabel>Username</FormLabel> */}
-            <Input placeholder="Enter your username" 
-            name="username" value={form.username} margin="15px"
-            onChange={(e) => setForm(e)}></Input>
+                {/* <FormLabel>Username</FormLabel> */}
+                <Input placeholder="Enter your username" 
+                name="username" value={form.username} margin="15px" id="username"
+                onChange={(e) => setForm(e)}></Input>
 
-            {/* <FormLabel>Password</FormLabel> */}
-            <Input type="password" placeholder="Enter your password" margin="15px"
-            name="password1" value={form.password1}
-            onChange={(e) => setForm(e)}></Input>
+                {/* <FormLabel>Password</FormLabel> */}
+                <Input type="password" placeholder="Enter your password" margin="15px"
+                name="password1" id="password1" value={form.password1}
+                onChange={(e) => setForm(e)} autoComplete='on'></Input>
 
-            {/* <FormLabel>Confirm Password</FormLabel> */}
-            <Input type="password" placeholder="Re-enter your password" 
-            name="password2" value={form.password2} margin="15px"
-            onChange={(e) => setForm(e)}></Input>
+                {/* <FormLabel>Confirm Password</FormLabel> */}
+                <Input type="password" placeholder="Re-enter your password" 
+                name="password2" id="password2" value={form.password2} margin="15px"
+                onChange={(e) => setForm(e)} autoComplete='on'></Input>
 
-            <Box textAlign="center" marginTop={"20px"} display={"flex"} justifyContent={"space-evenly"}>
-                <Button onClick={(e) => registrationValidation(e)}>Submit</Button>
-            </Box>
-           
-        </FormControl>
-        </Flex>
+                <Box textAlign="center" marginTop={"20px"} display={"flex"} justifyContent={"space-evenly"}>
+                    <Button onClick={(e) => registrationValidation(e)}>Submit</Button>
+                </Box>
+            
+            </FormControl>
+            </Flex>
+        </>
     )
 }
 

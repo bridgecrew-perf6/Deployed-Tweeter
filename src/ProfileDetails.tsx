@@ -4,12 +4,14 @@ import { MdVerifiedUser } from "react-icons/md"
 import { Icon, Button } from "@chakra-ui/react"
 import { TokenContext, UserContext } from "./App"
 import { baseUrl } from "./settings"
+import { useNavigate } from "react-router-dom"
 
 // @ts-ignore
 const ProfileDetails = ({userDetails}) => {
 
     const {user, setUser} = useContext(UserContext)
     const {token, setToken} = useContext(TokenContext)
+    let navigate = useNavigate()
 
     const handleFollow = () => {
         fetch(`${baseUrl}/tweeter/${userDetails.username}/`,{
@@ -20,7 +22,13 @@ const ProfileDetails = ({userDetails}) => {
             },
             body: JSON.stringify({"follow": userDetails.username})
         })
-        .then(response => response.json())
+        .then(response => {
+            if(response.status === 401) {
+                alert('You need to login to follow')
+                navigate(`${baseUrl}/login`)
+            }
+            return response.json
+        })
         .then(data => alert("Follow Successful"))
         .catch(err => alert(err))
         
@@ -41,7 +49,7 @@ const ProfileDetails = ({userDetails}) => {
                     <Box>
                         <Heading size="xs" display={"inline"}>Joined on {userDetails.doj}</Heading>
                     </Box>
-                    <Button onClick={handleFollow}>Follow</Button>
+                    <Button disabled={token===""} onClick={handleFollow}>Follow</Button>
                 </Box>
             </Flex>
         </Box>

@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Feed from '../Tweet/Feed'
 import TweetForm from '../Tweet/TweetForm'
-import HomeFeed from '../HomeFeed'
+import HomeFeed  from '../HomeFeed'
 
 import { TokenContext } from '../App'
 import { baseUrl } from '../settings'

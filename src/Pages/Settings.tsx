@@ -7,6 +7,7 @@ import useForm from '../Hooks/useForm'
 import { baseUrl } from '../settings'
 import { settingForm } from '../Types/Form'
 import { UserContext } from '../App'
+import Navbar from '../Navbar/Navbar'
 
 
 
@@ -33,6 +34,7 @@ const Settings = () => {
         if(token === "") {
             alert('You need to be logged in')
             navigate('/login')
+            return
         }
         setLoading(true)
 
@@ -72,7 +74,8 @@ const Settings = () => {
     }
 
 
-    const handleSettingSubmit = () => {
+    const handleSettingSubmit = (e: any) => {
+        e.preventDefault()
         fetch(`${baseUrl}/auth/user/`, {
             method: "PATCH",
             headers: {
@@ -94,42 +97,44 @@ const Settings = () => {
 
 
     return (
-        <Flex height={"100vh"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
-            <Box width={"80%"} boxSizing='border-box'>
+        <>
+            <Flex height={"100vh"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
+                <Box width={"80%"} boxSizing='border-box'>
 
-                <Heading textAlign={"center"}>{user.username}'s Settings</Heading>
-                <FormControl maxWidth={"100vw"} boxSizing='border-box'>
-                <Input type={"file"} onChange={(e) => uploadImage(e.target.files)}></Input>
-                {/* <FormLabel>Email Address</FormLabel> */}
+                    <Heading textAlign={"center"}>{user.username}'s Settings</Heading>
+                    <FormControl maxWidth={"100vw"} boxSizing='border-box'>
+                    <Input type={"file"} onChange={(e) => uploadImage(e.target.files)}></Input>
+                    {/* <FormLabel>Email Address</FormLabel> */}
 
-                <Input type="bio" placeholder="Enter an awesome Bio" 
-                name="bio" value={form.bio} marginY="15px"
-                onChange={(e) => {setForm({...form, [e.target.name]: e.target.value})}}></Input>
+                    <Input type="bio" placeholder="Enter an awesome Bio" 
+                    name="bio" value={form.bio} marginY="15px"
+                    onChange={(e) => {setForm({...form, [e.target.name]: e.target.value})}}></Input>
 
-                {/* <FormLabel>Username</FormLabel> */}
-                <Input placeholder="Enter your first name here" 
-                name="first" value={form.first} marginY="15px"
-                onChange={(e) => {setForm({...form, [e.target.name]: e.target.value})}}></Input>
+                    {/* <FormLabel>Username</FormLabel> */}
+                    <Input placeholder="Enter your first name here" 
+                    name="first" value={form.first} marginY="15px"
+                    onChange={(e) => {setForm({...form, [e.target.name]: e.target.value})}}></Input>
 
-                {/* <FormLabel>Password</FormLabel> */}
-                <Input placeholder="Enter your last name here" marginY="15px"
-                name="last" value={form.last}
-                onChange={(e) => {setForm({...form, [e.target.name]: e.target.value})}}></Input>
+                    {/* <FormLabel>Password</FormLabel> */}
+                    <Input placeholder="Enter your last name here" marginY="15px"
+                    name="last" value={form.last}
+                    onChange={(e) => {setForm({...form, [e.target.name]: e.target.value})}}></Input>
 
-                {/* gender Field select */}
-                <Select name="gender" id="gender" value={form.gender} onChange={(e) =>  {setForm({...form, [e.target.name]: e.target.value})} }>
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
-                    <option value="N">Prefer Not to say</option>
-                </Select>
+                    {/* gender Field select */}
+                    <Select name="gender" id="gender" value={form.gender} onChange={(e) =>  {setForm({...form, [e.target.name]: e.target.value})} }>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                        <option value="N">Prefer Not to say</option>
+                    </Select>
 
-                <Box textAlign="center" marginTop={"20px"} display={"flex"} justifyContent={"space-evenly"}>
-                    <Button onClick={() => handleSettingSubmit()}>Submit</Button>
+                    <Box textAlign="center" marginTop={"20px"} display={"flex"} justifyContent={"space-evenly"}>
+                        <Button type='button' onClick={(e) => handleSettingSubmit(e)}>Submit</Button>
+                    </Box>
+                
+                </FormControl>
                 </Box>
-            
-            </FormControl>
-            </Box>
-        </Flex>
+            </Flex>
+        </>
     )
 }
 

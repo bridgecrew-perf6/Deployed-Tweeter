@@ -7,6 +7,7 @@ import { baseUrl } from "../settings"
 import { TokenContext } from "../App"
 import { useContext } from 'react'
 import { useNavigate } from "react-router-dom"
+import Navbar from "../Navbar/Navbar"
 
 
 
@@ -22,7 +23,8 @@ const StandardSignIn = () => {
     const { token , setToken } = useContext(TokenContext)
     let navigate = useNavigate()
 
-    const loginRequest = (loginDetails: loginForm) => {
+    const loginRequest = (e: any, loginDetails: loginForm) => {
+        e.preventDefault()
         const url = baseUrl + '/auth/login/';
         var data;
         if(validateEmail(loginDetails.usernameOrEmail)) {
@@ -55,20 +57,22 @@ const StandardSignIn = () => {
     const [form, setForm ] = useForm({"usernameOrEmail": "", "password": ""}) as [loginForm, Function]
 
     return (
+        <>
         <Flex height={"100%"} marginY={"auto"} flexDirection={"column"} alignItems={"center"} justifyContent={"center"}>
-            <FormControl id="login-form" width="80%" height={"100%"}>
+            <FormControl id="user-login-form" width="80%" height={"100%"} as="form">
                 <Flex direction="column" justifyContent={"center"} alignItems={"center"}>
                     <Input margin={"15px"} placeholder="Username/Email" value={form.usernameOrEmail} name="usernameOrEmail" 
-                    onChange={(e) => setForm(e)}></Input>
+                    onChange={(e) => setForm(e)} id="username-email"></Input>
 
                     <Input margin={"15px"} placeholder="password" value={form.password} name="password" type="password"
-                    onChange={(e) => setForm(e)}></Input>
+                    onChange={(e) => setForm(e)} id="login-password" autoComplete="on"></Input>
                 </Flex>
                 <Box textAlign="center" marginTop={"20px"} display={"flex"} justifyContent={"space-evenly"}>
-                    <Button type="submit" onClick={() => loginRequest(form)}>Login</Button>
+                    <Button type="submit" onClick={(e) => loginRequest(e, form)}>Login</Button>
                 </Box>
             </FormControl>   
-        </Flex>     
+        </Flex>
+        </>     
     )
 }
 

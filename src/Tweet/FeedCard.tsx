@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 const FeedCard = ({ tweeter: {first: firstName, last: lastName, image_url: avatar, username}, content: tweetContent, likes, posted_on, id}: tweet) => {
     const name = `${firstName} ${lastName}`
 
-    console.log(id)
     return (
         <Box border="1px" borderColor="gray.200" marginX="1vw" marginY="1vh" paddingX="2vw" paddingY="2vh">
             <Flex direction="row">
