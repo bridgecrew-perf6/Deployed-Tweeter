@@ -23,8 +23,6 @@ https://thirsty-heisenberg-62b60a.netlify.app/
 ## Tweet
 ![tweeting](https://user-images.githubusercontent.com/80830461/154687118-ab7e8ebe-bb1e-438d-b9f7-31ac0577aea8.gif)
 
-## Follow and Unfollow User
-
 # Tech Stack
 + React
 + TypeScript
