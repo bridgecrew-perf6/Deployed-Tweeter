@@ -34,5 +34,6 @@ https://thirsty-heisenberg-62b60a.netlify.app/
 + SQlite Database
 + Cloudinary for storing Images
 
-# Database Architecture
 # Architecture
+![WhatsApp Image 2022-02-18 at 18 54 15](https://user-images.githubusercontent.com/80830461/154700271-a2ef5260-ab8b-4bb5-9b8b-fa6d62e2aeff.jpeg)
+
