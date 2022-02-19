@@ -37,3 +37,13 @@ https://thirsty-heisenberg-62b60a.netlify.app/
 # Architecture
 ![WhatsApp Image 2022-02-18 at 18 54 15](https://user-images.githubusercontent.com/80830461/154700271-a2ef5260-ab8b-4bb5-9b8b-fa6d62e2aeff.jpeg)
 
+# Learning Outcomes
++ Gained Familiarty with TypeScript and Chakra UI
++ Learned to integrate E-mail service providers
++ Setup Pagination and Hook it to infinite scroll
++ Gained an understanding of different authentication systems
+
+# Improvements
++ Improve UX
++ Implement Forgot password 
++ Add other features like retweet, like and share
